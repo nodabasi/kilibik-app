@@ -1,7 +1,7 @@
 # Kılıbık — website
 
 Static site for the Kılıbık mobile app, served by GitHub Pages at
-<https://nodabasi.github.io/kilibik-site/>.
+<https://nodabasi.github.io/kilibik-app/>.
 
 Plain HTML and one stylesheet — no build step, no dependencies. Edit a file, commit,
 push; Pages redeploys in a minute or two.
@@ -14,12 +14,12 @@ without Turkish.
 
 | URL | File | Used in the stores as |
 |---|---|---|
-| `/kilibik-site/` | `index.html` | Marketing URL (Turkish) |
-| `/kilibik-site/support/` | `support/index.html` | Support URL (Turkish) |
-| `/kilibik-site/privacy/` | `privacy/index.html` | Privacy Policy URL (Turkish) |
-| `/kilibik-site/en/` | `en/index.html` | Marketing URL (English) |
-| `/kilibik-site/en/support/` | `en/support/index.html` | Support URL (English) |
-| `/kilibik-site/en/privacy/` | `en/privacy/index.html` | Privacy Policy URL (English) |
+| `/kilibik-app/` | `index.html` | Marketing URL (Turkish) |
+| `/kilibik-app/support/` | `support/index.html` | Support URL (Turkish) |
+| `/kilibik-app/privacy/` | `privacy/index.html` | Privacy Policy URL (Turkish) |
+| `/kilibik-app/en/` | `en/index.html` | Marketing URL (English) |
+| `/kilibik-app/en/support/` | `en/support/index.html` | Support URL (English) |
+| `/kilibik-app/en/privacy/` | `en/privacy/index.html` | Privacy Policy URL (English) |
 
 **Do not rename these directories.** Once the paths are registered in App Store Connect
 and Google Play Console, changing one breaks a live store link.
