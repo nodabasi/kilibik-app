@@ -1,0 +1,280 @@
+/* Shared stylesheet for every page. Palette mirrors the app: magenta brand on a
+   near-white ground, with a blue accent for notes and a green/red pair for the
+   task states the app itself uses.
+
+   Mobile first: the base rules target a phone, and the only media queries widen
+   things for larger screens or adapt to a dark colour scheme. */
+
+:root {
+  --ink: #16101a;
+  --ink-soft: #635a67;
+  --ink-faint: #786e7c;
+  --ground: #fdfafd;
+  --card: #ffffff;
+  --line: #eee3ec;
+
+  --magenta: #d100b4;
+  --blue: #3d5ccc;
+  --green: #0e6f4a;
+  --red: #ce2b3c;
+
+  /* Same hues at low alpha, for card and badge fills. */
+  --magenta-tint: #d100b41a;
+  --blue-tint: #3d5ccc1a;
+  --green-tint: #0e6f4a1a;
+  --red-tint: #ce2b3c1a;
+
+  --shadow: 0 6px 24px rgb(22 16 26 / 0.10);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f6f1f5;
+    --ink-soft: #c4bac6;
+    --ink-faint: #a79ca8;
+    --ground: #100d12;
+    --card: #1b161e;
+    --line: #322b35;
+
+    --magenta: #ff15e1;
+    --blue: #8fa6f5;
+    --green: #4cc894;
+    --red: #ff7b85;
+
+    --magenta-tint: #ff15e124;
+    --blue-tint: #8fa6f524;
+    --green-tint: #4cc89424;
+    --red-tint: #ff7b8524;
+
+    --shadow: 0 6px 24px rgb(0 0 0 / 0.35);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 18px 64px;
+  background: var(--ground);
+  color: var(--ink);
+  font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  overflow-wrap: break-word;
+}
+
+img { max-width: 100%; }
+
+.wrap { max-width: 680px; margin: 0 auto; }
+
+/* Header — a tinted band in the brand magenta, warmed with the blue accent */
+
+header {
+  position: relative;
+  margin: 18px 0 8px;
+  padding: 40px 20px 32px;
+  text-align: center;
+  border-radius: 24px;
+  background:
+    radial-gradient(60% 80% at 20% 0%, var(--magenta-tint), transparent 70%),
+    radial-gradient(60% 80% at 80% 0%, var(--blue-tint), transparent 70%),
+    radial-gradient(70% 90% at 50% 110%, var(--magenta-tint), transparent 70%);
+}
+
+header img {
+  width: 84px;
+  height: 84px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+h1 {
+  margin: 18px 0 6px;
+  font-size: clamp(28px, 8vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  background: linear-gradient(100deg, var(--magenta), var(--blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tagline {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: clamp(16px, 4.4vw, 19px);
+}
+
+/* Section headings — a coloured bar alternating magenta and blue */
+
+h2 {
+  position: relative;
+  margin: 40px 0 12px;
+  padding-left: 14px;
+  font-size: clamp(20px, 5.4vw, 23px);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.16em;
+  bottom: 0.16em;
+  width: 5px;
+  border-radius: 3px;
+  background: var(--magenta);
+}
+
+h2:nth-of-type(even)::before { background: var(--blue); }
+
+h3 {
+  margin: 26px 0 4px;
+  font-size: 17px;
+  color: var(--magenta);
+}
+
+p { margin: 12px 0; }
+
+a { color: var(--blue); }
+
+hr {
+  margin: 44px 0 0;
+  border: 0;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--magenta), var(--blue));
+  opacity: 0.75;
+}
+
+/* Numbered walkthrough on the landing page */
+
+.steps {
+  list-style: none;
+  margin: 18px 0;
+  padding: 0;
+  counter-reset: step;
+}
+
+.steps li {
+  position: relative;
+  counter-increment: step;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--magenta);
+  border-radius: 14px;
+  padding: 14px 16px 14px 56px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 14px;
+  top: 15px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--magenta);
+  background: var(--magenta-tint);
+}
+
+.steps li:nth-child(even) { border-left-color: var(--blue); }
+.steps li:nth-child(even)::before { color: var(--blue); background: var(--blue-tint); }
+
+.steps b { display: block; font-size: 17px; }
+.steps li:nth-child(odd) b { color: var(--magenta); }
+.steps li:nth-child(even) b { color: var(--blue); }
+
+.steps span { color: var(--ink-soft); font-size: 15px; }
+
+/* Plain bullet lists — coloured markers, alternating */
+
+ul.plain { padding-left: 22px; }
+
+ul.plain li { margin: 7px 0; }
+
+ul.plain li::marker { color: var(--magenta); font-size: 1.1em; }
+ul.plain li:nth-child(even)::marker { color: var(--blue); }
+
+/* Contact box */
+
+.contact {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--magenta);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+}
+
+.contact p:first-child { margin-top: 0; }
+.contact p:last-child { margin-bottom: 0; }
+.contact a { font-weight: 600; }
+
+/* Callout for the destructive actions people come to this site looking for */
+
+.notice {
+  background: var(--red-tint);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--red);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 20px 0;
+}
+
+.notice p:first-child { margin-top: 0; }
+.notice p:last-child { margin-bottom: 0; }
+
+/* Effective-date line under a policy heading */
+
+.meta {
+  display: inline-block;
+  margin: 6px 0 0;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--magenta-tint);
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Footer */
+
+footer {
+  margin-top: 22px;
+  padding-top: 18px;
+  color: var(--ink-faint);
+  font-size: 15px;
+  line-height: 2.2;
+  text-align: center;
+}
+
+footer a {
+  margin: 0 4px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--magenta-tint);
+  color: var(--magenta);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+footer a:hover { text-decoration: underline; }
+
+footer .copyright { margin-top: 16px; line-height: 1.6; }
+
+/* Wider screens */
+
+@media (min-width: 560px) {
+  body { padding: 0 24px 72px; }
+  header { padding: 52px 24px 40px; }
+  header img { width: 96px; height: 96px; }
+  .steps li { padding-right: 20px; }
+}
