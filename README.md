@@ -39,8 +39,14 @@ Unlike a purely offline app, Kılıbık stores data on a server, so the privacy 
 concrete claims that the app has to keep honouring. If any of these change, the policy
 changes with them:
 
-- The data collected is limited to e-mail, display name, role, pairing, tasks and an FCM
-  device token — no analytics, ads or crash reporting are present.
+- The data the app itself collects is limited to e-mail, display name, role, pairing,
+  tasks and an FCM device token — no analytics or crash reporting are present.
+- Ads are served by Google AdMob, which reads the advertising identifier, IP address,
+  device information and ad interactions. That data goes straight to Google and is never
+  joined to the account. Consent is gathered through Google's UMP form, plus ATT on iOS,
+  and ads are capped at a 4+ content rating. If any of this changes — a new ad format, a
+  new placement, an analytics SDK — the Advertising section of both policies changes
+  with it.
 - A task is readable only by its creator and its assignee, and this is enforced by the
   Firestore rules, not just by the interface.
 - Account deletion removes the tasks, clears the partner's pairing, deletes the profile

@@ -19,14 +19,16 @@
   <p class="tagline">Neyi saklıyoruz, nasıl silersin</p>
 </header>
 
-<p class="meta">4 Eylül 2026'dan itibaren geçerli · iOS ve Android için Kılıbık mobil
+<p class="meta">5 Eylül 2026'dan itibaren geçerli · iOS ve Android için Kılıbık mobil
 uygulaması</p>
 
 <h2>Kısa özet</h2>
 <p>Kılıbık hesap istiyor, çünkü bütün mesele bir listeyi iki telefon arasında eşitlemek.
 Yani tamamen çevrimdışı bir uygulamadan farklı olarak verilerini bir sunucuda tutuyoruz:
 e-posta adresin, seçtiğin isim ve eşinle alışverişini yaptığın görevler.</p>
-<p>Bunları satmıyoruz, reklam göstermiyoruz, hiçbir analitik ya da takip çalıştırmıyoruz.
+<p>Bunları satmıyoruz ve uygulama içinde ne yaptığını ölçen bir analitik çalıştırmıyoruz.
+Uygulama reklam gösteriyor; reklamları Google AdMob sunuyor ve bunun tam olarak ne
+anlama geldiğini aşağıda <a href="#reklamlar">Reklamlar</a> bölümünde anlattık.
 Görevlerini tam olarak iki kişi okuyabiliyor: sen ve eşleştiğin kişi. Hesabının tamamını
 ve ona bağlı her şeyi uygulamanın içinden silebilirsin.</p>
 
@@ -43,8 +45,10 @@ ve ona bağlı her şeyi uygulamanın içinden silebilirsin.</p>
   <li><b>Her cihaz için bir bildirim anahtarı</b> — bildirimin telefonuna ulaşabilmesi
   için Google'ın verdiği tanımlayıcı. Seni değil, kurulumu tanımlar.</li>
 </ul>
-<p>Liste bundan ibaret. Konum yok, rehber yok, fotoğraf yok, adres defteri yok, reklam
-kimliği yok, cihaz parmak izi yok.</p>
+<p>Bizim sunucumuzda tuttuğumuz liste bundan ibaret. Konum yok, rehber yok, fotoğraf yok,
+adres defteri yok, cihaz parmak izi yok. Reklam kimliğine biz erişmiyoruz; reklamlar
+için Google'ın neyi kullandığı aşağıda <a href="#reklamlar">Reklamlar</a> bölümünde
+yazıyor.</p>
 
 <h2>Nerede saklanıyor</h2>
 <p>Her şey <b>Google Firebase</b>'de duruyor: hesap için Firebase Authentication, profil
@@ -52,8 +56,10 @@ ve görevler için Cloud Firestore, bildirimler için Firebase Cloud Messaging. 
 <a href="https://firebase.google.com/support/privacy">Firebase'in gizlilik şartları</a>
 altında Google Cloud sunucularında tutuluyor ve Google bizim veri işleyicimiz
 konumunda.</p>
-<p>Verilerini başka kimse almıyor. Satılmıyor, reklamcılarla paylaşılmıyor ve yukarıda
-sayılan Google servislerinin dışında hiçbir üçüncü tarafa aktarılmıyor.</p>
+<p>Hesabın ve görevlerin satılmıyor, reklamcılarla paylaşılmıyor ve yukarıda sayılan
+Google servislerinin dışında hiçbir üçüncü tarafa aktarılmıyor. Reklam gösterimi bundan
+tamamen ayrı bir akış: AdMob'un cihazından aldığı veri, e-posta adresine ya da
+görevlerine hiçbir noktada bağlanmıyor.</p>
 
 <h2>Görevlerini kim okuyabilir</h2>
 <p>İki kişi: görevi oluşturan ve görevin verildiği kişi. Bu, yalnızca arayüzde gizlenmiş
@@ -96,10 +102,39 @@ yaz; hesabı senin adına silelim.</p>
 <p>Hesabın ve görevlerin, sen silene kadar duruyor. Otomatik bir süre sonu yok, silmenin
 ardından tutulan bir arşiv de yok.</p>
 
-<h2>Reklam yok, analitik yok</h2>
-<p>Kılıbık ücretsiz; reklam, uygulama içi satın alma, analitik kütüphanesi ve çökme
-raporlama servisi içermiyor. Uygulamayı nasıl kullandığına dair hiçbir şey ölçülmüyor ya
-da bir yere raporlanmıyor.</p>
+<h2 id="reklamlar">Reklamlar</h2>
+<p>Kılıbık ücretsiz ve masrafını reklamla karşılıyor. Görev listesinin arasında ve görev
+oluşturma ekranında banner reklamlar görüyorsun. Reklamları <b>Google AdMob</b> sunuyor.</p>
+<p>Reklam gösterebilmek için AdMob cihazından bazı verilere erişiyor. Bunlar bize
+uğramıyor, doğrudan Google'a gidiyor:</p>
+<ul class="plain">
+  <li><b>Reklam kimliğin</b> — iOS'ta IDFA, Android'de Reklam Kimliği. İsminle ya da
+  e-postanla ilgisi olmayan, telefonunun ayarlarından sıfırlayabildiğin bir numara.</li>
+  <li><b>IP adresin</b> — reklamın hangi ülkeye ve hangi dile göre seçileceğini
+  belirlemek için. Sokak seviyesinde konum değil.</li>
+  <li><b>Cihaz bilgisi</b> — model, işletim sistemi sürümü, ekran boyutu, dil.</li>
+  <li><b>Reklam etkileşimi</b> — hangi reklamın gösterildiği ve tıklanıp tıklanmadığı.
+  Aynı reklamı tekrar tekrar göstermemek ve sahte tıklamayı ayıklamak için.</li>
+</ul>
+<p>Bu verinin hiçbiri Kılıbık hesabınla ilişkilendirilmiyor. Google'ın bu veriyi neden ve
+nasıl işlediğini <a href="https://business.safety.google/adsprocessing/">reklam veri
+politikasında</a> okuyabilirsin.</p>
+<p>Reklamlar 4+ yaş sınıfına ayarlı: kumar, alkol, flört ve yetişkin içerikli reklamlar
+gösterilmiyor.</p>
+<p>Bunun dışında uygulamada analitik kütüphanesi, çökme raporlama servisi ya da uygulama
+içi satın alma yok. Uygulamayı nasıl kullandığın ölçülmüyor.</p>
+
+<h2>Reklamlar için iznin</h2>
+<p>Uygulamayı ilk açtığında Google'ın izin ekranı çıkıyor ve kişiselleştirilmiş reklam
+isteyip istemediğini soruyor. iOS'ta ayrıca Apple'ın "uygulamanın seni izlemesine izin
+ver" uyarısı geliyor.</p>
+<p>Hayır dersen reklamlar yine çıkar, ama kişiselleştirilmez — geçmişine göre değil,
+yalnızca bulunduğun ülkeye göre seçilir. Uygulama iki durumda da tamamen aynı çalışır,
+hiçbir özellik kapanmaz.</p>
+<p>Kararını sonradan değiştirmek istersen telefonunun ayarlarından yapabilirsin: iOS'ta
+<b>Ayarlar › Gizlilik ve Güvenlik › İzleme</b>, Android'de <b>Ayarlar › Google ›
+Reklamlar</b>. Reklam kimliğini aynı yerden sıfırlayabilir ya da tamamen
+silebilirsin.</p>
 
 <h2>Uygulama mağazaları</h2>
 <p>Kılıbık, Apple App Store ve Google Play üzerinden dağıtılıyor. Apple ve Google, o

@@ -19,16 +19,18 @@
   <p class="tagline">What we store, and how to erase it</p>
 </header>
 
-<p class="meta">Effective 4 September 2026 · Applies to the Kılıbık mobile app for iOS
+<p class="meta">Effective 5 September 2026 · Applies to the Kılıbık mobile app for iOS
 and Android</p>
 
 <h2>The short version</h2>
 <p>Kılıbık needs an account, because the whole point is syncing a list between two
 phones. So unlike a purely offline app, we do hold your data on a server: your e-mail
 address, the name you chose, and the tasks you and your partner exchange.</p>
-<p>We do not sell it, do not show ads, and run no analytics or tracking of any kind. Your
-tasks are readable by exactly two people — you and the partner you paired with. You can
-delete the entire account, and everything attached to it, from inside the app.</p>
+<p>We do not sell it, and we run no analytics measuring what you do inside the app. The app
+does show ads, served by Google AdMob; exactly what that involves is set out under
+<a href="#ads">Advertising</a> below. Your tasks are readable by exactly two people — you
+and the partner you paired with. You can delete the entire account, and everything
+attached to it, from inside the app.</p>
 
 <h2>What we collect</h2>
 <ul class="plain">
@@ -43,8 +45,10 @@ delete the entire account, and everything attached to it, from inside the app.</
   <li><b>A notification token for each device</b> — an identifier Google gives us so a
   notification can reach your phone. It identifies the installation, not you.</li>
 </ul>
-<p>That is the complete list. There is no location, no contacts, no photos, no address
-book, no advertising identifier and no device fingerprint.</p>
+<p>That is the complete list of what we hold on our server. There is no location, no
+contacts, no photos, no address book and no device fingerprint. We have no access to your
+advertising identifier; what Google uses it for is set out under
+<a href="#ads">Advertising</a> below.</p>
 
 <h2>Where it is stored</h2>
 <p>Everything sits in <b>Google Firebase</b> — Firebase Authentication for the account,
@@ -52,8 +56,10 @@ Cloud Firestore for the profile and tasks, and Firebase Cloud Messaging for the
 notifications. That means the data is held on Google Cloud servers under
 <a href="https://firebase.google.com/support/privacy">Firebase's privacy terms</a>, and
 Google acts as our processor.</p>
-<p>Nobody else receives your data. It is not sold, not shared with advertisers, and not
-handed to any third party beyond the Google services listed above.</p>
+<p>Your account and your tasks are not sold, not shared with advertisers, and not handed to
+any third party beyond the Google services listed above. Ad serving is a separate flow
+altogether: what AdMob collects from your device is never joined to your e-mail address or
+your tasks.</p>
 
 <h2>Who can read your tasks</h2>
 <p>Two people: the one who created the task and the one it was assigned to. This is
@@ -96,10 +102,39 @@ bottom of this page and we will delete the account for you.</p>
 <p>Your account and tasks stay until you delete them. There is no automatic expiry, and
 no archive kept after deletion.</p>
 
-<h2>No ads, no analytics</h2>
-<p>Kılıbık is free and carries no advertising, no in-app purchases, no analytics SDK and
-no crash-reporting service. Nothing about how you use the app is measured or reported
-anywhere.</p>
+<h2 id="ads">Advertising</h2>
+<p>Kılıbık is free and pays for itself with ads. You see banner ads between the tasks in
+your list and on the task-creation screen. They are served by <b>Google AdMob</b>.</p>
+<p>To serve them, AdMob reads some data from your device. None of it passes through us; it
+goes straight to Google:</p>
+<ul class="plain">
+  <li><b>Your advertising identifier</b> — the IDFA on iOS, the Advertising ID on Android.
+  A number with no connection to your name or e-mail, which you can reset from your
+  phone's settings.</li>
+  <li><b>Your IP address</b> — used to decide which country and language the ad should be
+  chosen for. Not street-level location.</li>
+  <li><b>Device information</b> — model, operating system version, screen size,
+  language.</li>
+  <li><b>Ad interaction</b> — which ad was shown and whether it was tapped, so the same ad
+  is not repeated endlessly and fraudulent clicks can be filtered out.</li>
+</ul>
+<p>None of this is linked to your Kılıbık account. Google explains why and how it
+processes this data in its
+<a href="https://business.safety.google/adsprocessing/">advertising data policy</a>.</p>
+<p>Ads are restricted to a 4+ content rating, so no gambling, alcohol, dating or adult
+advertising is shown.</p>
+<p>Beyond that the app carries no analytics SDK, no crash-reporting service and no in-app
+purchases. Nothing about how you use the app is measured.</p>
+
+<h2>Your consent for ads</h2>
+<p>The first time you open the app, Google's consent screen asks whether you want
+personalised ads. On iOS, Apple's "allow the app to track you" prompt appears as well.</p>
+<p>If you say no, ads still appear but are not personalised — they are chosen by the
+country you are in rather than by anything about you. The app behaves identically either
+way; no feature is withheld.</p>
+<p>To change your mind later, use your phone's settings: <b>Settings › Privacy &amp;
+Security › Tracking</b> on iOS, <b>Settings › Google › Ads</b> on Android. You can reset
+or delete your advertising identifier from the same place.</p>
 
 <h2>App stores</h2>
 <p>Kılıbık is distributed through the Apple App Store and Google Play. Apple and Google
