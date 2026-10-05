@@ -19,14 +19,16 @@
   <p class="tagline">What we store, and how to erase it</p>
 </header>
 
-<p class="meta">Effective 5 September 2026 · Applies to the Kılıbık mobile app for iOS
+<p class="meta">Effective 5 October 2026 · Applies to the Kılıbık mobile app for iOS
 and Android</p>
 
 <h2>The short version</h2>
 <p>Kılıbık needs an account, because the whole point is syncing a list between two
 phones. So unlike a purely offline app, we do hold your data on a server: your e-mail
 address, the name you chose, and the tasks you and your partner exchange.</p>
-<p>We do not sell it, and we run no analytics measuring what you do inside the app. The app
+<p>We do not sell it. To see which features get used and to fix crashes we collect
+anonymous usage statistics and crash reports; your tasks, name and e-mail are never part
+of them, and you can turn them off in Settings (<a href="#analytics">details</a>). The app
 does show ads, served by Google AdMob; exactly what that involves is set out under
 <a href="#ads">Advertising</a> below. Your tasks are readable by exactly two people — you
 and the partner you paired with. You can delete the entire account, and everything
@@ -42,6 +44,9 @@ attached to it, from inside the app.</p>
   while it is waiting to be used. The code is deleted the moment it is redeemed.</li>
   <li><b>Your tasks</b> — the title, the optional detail and note, whether it is done, and
   the times it was created and completed.</li>
+  <li><b>Anonymous usage statistics and crash reports</b> — which screens are opened,
+  counts of events such as "a task was created", and technical details if the app
+  crashes. Details <a href="#analytics">below</a>.</li>
   <li><b>A notification token for each device</b> — an identifier Google gives us so a
   notification can reach your phone. It identifies the installation, not you.</li>
 </ul>
@@ -52,8 +57,9 @@ advertising identifier; what Google uses it for is set out under
 
 <h2>Where it is stored</h2>
 <p>Everything sits in <b>Google Firebase</b> — Firebase Authentication for the account,
-Cloud Firestore for the profile and tasks, and Firebase Cloud Messaging for the
-notifications. That means the data is held on Google Cloud servers under
+Cloud Firestore for the profile and tasks, Firebase Cloud Messaging for the
+notifications, Google Analytics for Firebase for usage statistics and Firebase
+Crashlytics for crash reports. That means the data is held on Google Cloud servers under
 <a href="https://firebase.google.com/support/privacy">Firebase's privacy terms</a>, and
 Google acts as our processor.</p>
 <p>Your account and your tasks are not sold, not shared with advertisers, and not handed to
@@ -123,8 +129,30 @@ processes this data in its
 <a href="https://business.safety.google/adsprocessing/">advertising data policy</a>.</p>
 <p>Ads are restricted to a 4+ content rating, so no gambling, alcohol, dating or adult
 advertising is shown.</p>
-<p>Beyond that the app carries no analytics SDK, no crash-reporting service and no in-app
-purchases. Nothing about how you use the app is measured.</p>
+<p>There are no in-app purchases.</p>
+
+<h2 id="analytics">Usage statistics and crash reports</h2>
+<p>To see which features are useful and to fix bugs we use two Firebase services:
+<b>Google Analytics for Firebase</b> and <b>Firebase Crashlytics</b>.</p>
+<ul class="plain">
+  <li><b>What is sent</b> — the screens you open and events such as "signed up",
+  "paired", "task created" or "thanked"; coarse categories such as a task's priority or
+  the reaction chosen; your role (Princess/Boy), whether you are paired and the app
+  language; device model, operating system, app version, country; and a random
+  per-installation ID that Firebase assigns. If the app crashes, the technical stack
+  trace of the crash.</li>
+  <li><b>What is not sent</b> — the text of your tasks, notes and special days, your
+  name, your e-mail, your partner's name, your invite code. This data is not linked to
+  your account or your identity.</li>
+  <li><b>Not used for advertising</b> — Analytics does not access your advertising
+  identifier (IDFA / Advertising ID), the data is not used to personalise ads and is not
+  combined with AdMob. By Apple's definition this is not tracking.</li>
+</ul>
+<p>If you'd rather not, turn off <b>Settings › Privacy › Share usage statistics</b>; from
+then on neither statistics nor crash reports are sent. The app keeps working exactly the
+same.</p>
+<p>Google explains how it processes this data on the
+<a href="https://firebase.google.com/support/privacy">Firebase privacy page</a>.</p>
 
 <h2>Your consent for ads</h2>
 <p>The first time you open the app, Google's consent screen asks whether you want
