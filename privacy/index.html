@@ -19,15 +19,17 @@
   <p class="tagline">Neyi saklıyoruz, nasıl silersin</p>
 </header>
 
-<p class="meta">5 Eylül 2026'dan itibaren geçerli · iOS ve Android için Kılıbık mobil
+<p class="meta">10 Ekim 2026'dan itibaren geçerli · iOS ve Android için Kılıbık mobil
 uygulaması</p>
 
 <h2>Kısa özet</h2>
 <p>Kılıbık hesap istiyor, çünkü bütün mesele bir listeyi iki telefon arasında eşitlemek.
 Yani tamamen çevrimdışı bir uygulamadan farklı olarak verilerini bir sunucuda tutuyoruz:
 e-posta adresin, seçtiğin isim ve eşinle alışverişini yaptığın görevler.</p>
-<p>Bunları satmıyoruz ve uygulama içinde ne yaptığını ölçen bir analitik çalıştırmıyoruz.
-Uygulama reklam gösteriyor; reklamları Google AdMob sunuyor ve bunun tam olarak ne
+<p>Bunları satmıyoruz. Uygulamanın hangi özelliklerinin kullanıldığını görmek ve
+çökmeleri düzeltmek için isimsiz kullanım istatistikleri ve çökme raporları topluyoruz;
+bunlara görevlerin, adın ya da e-postan girmiyor ve Ayarlar'dan kapatabiliyorsun
+(<a href="#analitik">ayrıntılar</a>). Uygulama reklam gösteriyor; reklamları Google AdMob sunuyor ve bunun tam olarak ne
 anlama geldiğini aşağıda <a href="#reklamlar">Reklamlar</a> bölümünde anlattık.
 Görevlerini tam olarak iki kişi okuyabiliyor: sen ve eşleştiğin kişi. Hesabının tamamını
 ve ona bağlı her şeyi uygulamanın içinden silebilirsin.</p>
@@ -42,6 +44,9 @@ ve ona bağlı her şeyi uygulamanın içinden silebilirsin.</p>
   davet kodun. Kod, kullanıldığı anda siliniyor.</li>
   <li><b>Görevlerin</b> — başlık, isteğe bağlı detay ve not, tamamlanıp tamamlanmadığı,
   oluşturulma ve tamamlanma zamanları.</li>
+  <li><b>İsimsiz kullanım istatistikleri ve çökme raporları</b> — hangi ekranların
+  açıldığı, "görev oluşturuldu" gibi olay sayıları ve uygulama çökerse teknik
+  ayrıntılar. Ayrıntıları <a href="#analitik">aşağıda</a>.</li>
   <li><b>Her cihaz için bir bildirim anahtarı</b> — bildirimin telefonuna ulaşabilmesi
   için Google'ın verdiği tanımlayıcı. Seni değil, kurulumu tanımlar.</li>
 </ul>
@@ -52,7 +57,9 @@ yazıyor.</p>
 
 <h2>Nerede saklanıyor</h2>
 <p>Her şey <b>Google Firebase</b>'de duruyor: hesap için Firebase Authentication, profil
-ve görevler için Cloud Firestore, bildirimler için Firebase Cloud Messaging. Yani veriler
+ve görevler için Cloud Firestore, bildirimler için Firebase Cloud Messaging, kullanım
+istatistikleri için Google Analytics for Firebase, çökme raporları için Firebase
+Crashlytics. Yani veriler
 <a href="https://firebase.google.com/support/privacy">Firebase'in gizlilik şartları</a>
 altında Google Cloud sunucularında tutuluyor ve Google bizim veri işleyicimiz
 konumunda.</p>
@@ -121,8 +128,32 @@ nasıl işlediğini <a href="https://business.safety.google/adsprocessing/">rekl
 politikasında</a> okuyabilirsin.</p>
 <p>Reklamlar 4+ yaş sınıfına ayarlı: kumar, alkol, flört ve yetişkin içerikli reklamlar
 gösterilmiyor.</p>
-<p>Bunun dışında uygulamada analitik kütüphanesi, çökme raporlama servisi ya da uygulama
-içi satın alma yok. Uygulamayı nasıl kullandığın ölçülmüyor.</p>
+<p>Uygulamada uygulama içi satın alma yok.</p>
+
+<h2 id="analitik">Kullanım istatistikleri ve çökme raporları</h2>
+<p>Hangi özelliklerin işe yaradığını görmek ve hataları düzeltmek için iki Firebase
+servisi kullanıyoruz: <b>Google Analytics for Firebase</b> ve <b>Firebase
+Crashlytics</b>.</p>
+<ul class="plain">
+  <li><b>Ne gidiyor</b> — açılan ekranlar ve "kayıt olundu", "eşleşildi", "görev
+  oluşturuldu", "teşekkür edildi" gibi olaylar; görevin önceliği ya da seçilen tepki
+  gibi kaba kategoriler; rolün (Prenses/Erkek), eşleşmiş olup olmadığın ve uygulama
+  dilin; cihaz modeli, işletim sistemi, uygulama sürümü, ülke; Firebase'in kurulum
+  başına verdiği rastgele bir kimlik. Uygulama çökerse çökme anındaki teknik yığın
+  izi.</li>
+  <li><b>Ne gitmiyor</b> — görevlerin, notların ve özel günlerinin metni, adın,
+  e-postan, eşinin adı, davet kodun. Bu veriler hesabına ya da kimliğine
+  bağlanmıyor.</li>
+  <li><b>Reklam için kullanılmıyor</b> — Analytics reklam kimliğine (IDFA / Reklam
+  Kimliği) erişmiyor, veriler reklam kişiselleştirmesi için kullanılmıyor ve AdMob ile
+  birleştirilmiyor. Apple'ın tanımıyla bu bir izleme değil.</li>
+</ul>
+<p>İstemiyorsan <b>Ayarlar › Gizlilik › Kullanım istatistiklerini paylaş</b> anahtarını
+kapat; o andan itibaren ne istatistik ne de çökme raporu gönderilir. Uygulama aynı
+şekilde çalışmaya devam eder.</p>
+<p>Google'ın bu veriyi nasıl işlediğini
+<a href="https://firebase.google.com/support/privacy">Firebase gizlilik sayfasında</a>
+okuyabilirsin.</p>
 
 <h2>Reklamlar için iznin</h2>
 <p>Uygulamayı ilk açtığında Google'ın izin ekranı çıkıyor ve kişiselleştirilmiş reklam
