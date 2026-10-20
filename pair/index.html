@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kılıbık — Eşleş</title>
+<meta name="description" content="Kılıbık davet kodu: uygulamayı açıp eşinle tek dokunuşla eşleş.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/logo.png">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .code { font-size: 40px; font-weight: 800; letter-spacing: 6px; text-align: center; margin: 8px 0; }
+  .open { display: block; text-align: center; padding: 14px; border-radius: 12px;
+          background: var(--magenta); color: #fff; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <img src="../assets/logo.png" alt="Kılıbık">
+  <h1 data-i18n="title">Eşleş</h1>
+  <p class="tagline" data-i18n="tagline">Eşin seni Kılıbık'a davet etti</p>
+</header>
+
+<div class="contact">
+  <p data-i18n="codeLabel">Davet kodu</p>
+  <p class="code" id="code">——————</p>
+  <a class="open" id="open" href="#" data-i18n="open">Kılıbık'ta aç</a>
+</div>
+
+<h2 data-i18n="howTitle">Nasıl eşleşirsin</h2>
+<ul class="plain">
+  <li data-i18n="step1">Yukarıdaki düğmeye dokun. Kılıbık açılır ve kod eşleşme alanına yazılır.</li>
+  <li data-i18n="step2">Henüz giriş yapmadıysan önce kayıt ol ya da giriş yap; kod seni bekler.</li>
+  <li data-i18n="step3">Eşleşme ekranında Eşleş'e bas.</li>
+</ul>
+
+<h2 data-i18n="noAppTitle">Uygulama yüklü değil mi?</h2>
+<p data-i18n="noApp">Kılıbık'ı App Store'dan indir, sonra bu sayfaya dönüp düğmeye tekrar dokun. Düğme çalışmazsa kodu eşleşme ekranındaki alana elle yaz.</p>
+<p><a id="store" href="../" data-i18n="store">Kılıbık'ı indir</a></p>
+
+<hr>
+<footer>
+  <a href="../support/" data-i18n="support">Destek</a>
+  <a href="../privacy/" data-i18n="privacy">Gizlilik Politikası</a>
+</footer>
+
+</div>
+<script>
+  // Mesajlasma uygulamalari kilibik:// semasini tiklanabilir yapmiyor; bu
+  // sayfa https baglantisini uygulamaya ceviren ara adim.
+  var STORE_URL = '../';
+  var params = new URLSearchParams(location.search);
+  var code = (params.get('code') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  var valid = /^[A-HJ-KM-NP-Z2-9]{6}$/.test(code);
+
+  var en = {
+    title: 'Pair up', tagline: 'Your partner invited you to Kılıbık', codeLabel: 'Invite code',
+    open: 'Open in Kılıbık', howTitle: 'How to pair',
+    step1: 'Tap the button above. Kılıbık opens with the code filled in.',
+    step2: "If you haven't signed in yet, sign up or log in first; the code waits for you.",
+    step3: 'Tap Pair up on the pairing screen.', noAppTitle: "Don't have the app?",
+    noApp: "Download Kılıbık from the App Store, then come back and tap the button again. If it doesn't work, type the code into the pairing screen yourself.",
+    store: 'Download Kılıbık', support: 'Support', privacy: 'Privacy Policy',
+    invalid: 'This link has no valid code. Ask your partner to share it again.'
+  };
+  var trInvalid = 'Bu bağlantıda geçerli bir kod yok. Eşinden tekrar paylaşmasını iste.';
+  var lang = (navigator.language || 'tr').slice(0, 2);
+  if (lang !== 'tr') {
+    document.documentElement.lang = 'en';
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var text = en[el.getAttribute('data-i18n')];
+      if (text) { el.textContent = text; }
+    });
+  }
+
+  document.getElementById('store').href = STORE_URL;
+  var open = document.getElementById('open');
+  if (valid) {
+    document.getElementById('code').textContent = code;
+    open.href = 'kilibik://pair/' + code;
+  } else {
+    open.style.display = 'none';
+    document.getElementById('code').textContent = lang === 'tr' ? trInvalid : en.invalid;
+    document.getElementById('code').style.fontSize = '17px';
+    document.getElementById('code').style.letterSpacing = '0';
+  }
+</script>
+</body>
+</html>
